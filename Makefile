@@ -4,8 +4,6 @@ pkg.name := $(shell json -e 'this.q = this.name + "-" + this.version' q < src/ma
 mkdir = @mkdir -p $(dir $@)
 src := $(shell find src -type f)
 
-# crx generation
-
 crx: $(out)/$(pkg.name).crx
 
 $(out)/$(pkg.name).zip: $(src)
@@ -18,7 +16,13 @@ $(out)/$(pkg.name).zip: $(src)
 private.pem:
 	openssl genrsa 2048 > $@
 
-# sf
+
 
 upload:
 	scp $(out)/$(pkg.name).crx gromnitsky@web.sourceforge.net:/home/user-web/gromnitsky/htdocs/js/chrome/
+
+
+
+.PHONY: test
+test:
+	mocha --require @babel/register -u tdd test/*mjs

@@ -1,0 +1,26 @@
+{
+    "private": "true",
+    "name": "see-src-manifest.json",
+    "version": "0.0.1-see-src-manifest.json",
+    "author": "Alexander Gromnitsky",
+    "license": "MIT",
+
+    "//": "staff we need for running `make test`",
+    "dependencies": {
+        "@babel/core": "~7.0.0",
+        "@babel/preset-env": "~7.0.0",
+        "@babel/register": "~7.0.0",
+        "fetch-mock": "~7.0.0-alpha.6",
+        "isomorphic-fetch": "~2.2.1"
+    },
+
+    "babel": {
+        "presets": [[
+            "@babel/env", {
+                "targets": {
+                    "chrome": "69"
+                }
+            }
+        ]]
+    }
+}
