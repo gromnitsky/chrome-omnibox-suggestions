@@ -1,19 +1,10 @@
-'use strict';
-
 /* global chrome */
 
+import uds from './suggestions.mjs'
+
 let suggestions = function(term, omnibox) {
-    console.log(term)
-    omnibox([
-	{
-	    content: "mental",
-	    description: "mental <dim>when something is absolutely insane, or just down right gnar.</dim>"
-	},
-	{
-	    content: "metalhead",
-	    description: "metalhead <dim>Group of musical listeners that are often described as drunkards, partiers, and fighters</dim>"
-	}
-    ])
+    console.log('suggestions for:', term)
+    uds(term).then(omnibox)
 }
 
 let suggestions_debounced = debounce(function(term, omnibox) {
