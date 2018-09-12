@@ -26,4 +26,19 @@ suite('suggestions', function() {
 	    }
 	])
     })
+
+    test('empty input', async function() {
+	let r = await uds('')
+	assert.deepEqual(r, [])
+    })
+
+    test('invalid responce object', async function() {
+	fetch_mock.get('*', {}, {overwriteRoutes: true})
+	let r = await uds('u')
+	assert.deepEqual(r, [])
+
+	fetch_mock.get('*', [1,2,3], {overwriteRoutes: true})
+	r = await uds('u')
+	assert.deepEqual(r, [])
+    })
 })

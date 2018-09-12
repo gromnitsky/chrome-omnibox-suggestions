@@ -1,8 +1,7 @@
 export default async function(term) {
     if (!(term = term.trim())) return []
 
-    let json = await efetch(`http://api.urbandictionary.com/v0/autocomplete-extra?term=${encodeURIComponent(term)}`).then( r => r.json())
-    return format(json)
+    return efetch(`http://api.urbandictionary.com/v0/autocomplete-extra?term=${encodeURIComponent(term)}`).then( r => r.json()).then(format)
 }
 
 function efetch(url, opt) {
