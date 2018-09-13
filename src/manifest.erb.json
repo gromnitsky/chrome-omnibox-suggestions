@@ -8,7 +8,6 @@
     "x-type": "<%= type %>",
     "x-type-desc": "<%= type_desc %>",
     "permissions": [
-        "tabs",
 	"<all_urls>"
     ],
     "background": {
