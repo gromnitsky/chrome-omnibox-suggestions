@@ -1,7 +1,15 @@
-name := urbandictionary
-type := en
-type_desc :=
-keyword := u
+engine.type = $(shell egrep -m1 '^$(name)\s' engines.txt | awk '{print $$3}')
+engine.attr = $(shell egrep -m1 '^$(name)\s[^\s]+\s$(type)\s?' engines.txt | awk '{print $$$1}')
+
+name :=
+type := $(engine.type)
+keyword := $(call engine.attr,2)
+type_desc := $(call engine.attr,4)
+
+
+
+$(if $(name),,$(error `name` is empty, look in engines.txt))
+$(if $(keyword),,$(error `keyword` is empty (`type` may be invalid)))
 
 all: crx
 
@@ -31,10 +39,11 @@ crx: $(pkg).crx
 $(pkg).zip: $(compile)
 	cd $(dir $<) && zip -qr $(CURDIR)/$@ *
 
-%.crx: %.zip private.pem
-	./zip2crx.sh $< private.pem
+pkg.key := $(out).pem
+%.crx: %.zip $(pkg.key)
+	./zip2crx.sh $< $(pkg.key)
 
-private.pem:
+$(pkg.key):
 	openssl genrsa 2048 > $@
 
 
