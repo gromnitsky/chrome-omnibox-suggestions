@@ -3,16 +3,20 @@ let manifest = chrome.runtime.getManifest()
 import(`./suggestions/${manifest['x-name']}.mjs`).then( module => {
     let suggestions = function(term, omnibox) {
 	console.log('suggestions for:', term)
-	module.default(term).then(omnibox)
+	module.default(term, manifest['x-type']).then(omnibox)
     }
     let suggestions_debounced = debounce(function(term, omnibox) {
 	suggestions(term, omnibox)
     }, 500)
 
     chrome.omnibox.onInputChanged.addListener(suggestions_debounced)
+    chrome.omnibox.onInputEntered.addListener( (term, tab_disposition) => {
+	if (!term.trim()) return
+	navigate(module.url(term, manifest['x-type']), tab_disposition)
+    })
 })
 
-let navigate = function(url, tab_disposition) {
+function navigate(url, tab_disposition) {
     console.log(tab_disposition, 'navigate to', url)
     switch (tab_disposition) {
     case 'newForegroundTab':
@@ -27,12 +31,6 @@ let navigate = function(url, tab_disposition) {
 	})
     }
 }
-
-chrome.omnibox.onInputEntered.addListener( (term, tab_disposition) => {
-    if (!term.trim()) return
-    navigate(`https://www.urbandictionary.com/define.php?term=${encodeURIComponent(term)}`, tab_disposition)
-})
-
 
 /* 3rd party code */
 
