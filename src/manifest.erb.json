@@ -1,0 +1,21 @@
+{
+    "manifest_version": 2,
+    "name": "<%= name %>-<%= type %>-omnibox",
+    "description": "<%= name %> <%= type_desc.size>0 ? type_desc : type %> search suggestions in your omnibox (address bar). The keyword is `<%= keyword %>`.",
+    "version": "0.0.1",
+    "omnibox": { "keyword" : "<%= keyword %>" },
+    "x-name": "<%= name %>",
+    "x-type": "<%= type %>",
+    "x-type-desc": "<%= type_desc %>",
+    "permissions": [
+        "tabs",
+	"<all_urls>"
+    ],
+    "background": {
+	"persistent": false,
+	"page": "event_page.html"
+    },
+    "icons": {
+	"128": "icons/<%= name %>.128.png"
+    }
+}

@@ -3,7 +3,7 @@ import assert from 'assert'
 import fetch from 'isomorphic-fetch'
 import fetch_mock from 'fetch-mock'
 
-import uds from '../src/suggestions.mjs'
+import uds from '../src/suggestions/urbandictionary.mjs'
 
 suite('suggestions', function() {
     setup(function() {

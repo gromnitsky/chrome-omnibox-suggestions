@@ -1,17 +1,16 @@
-/* global chrome */
+let manifest = chrome.runtime.getManifest()
 
-import uds from './suggestions.mjs'
+import(`./suggestions/${manifest['x-name']}.mjs`).then( module => {
+    let suggestions = function(term, omnibox) {
+	console.log('suggestions for:', term)
+	module.default(term).then(omnibox)
+    }
+    let suggestions_debounced = debounce(function(term, omnibox) {
+	suggestions(term, omnibox)
+    }, 500)
 
-let suggestions = function(term, omnibox) {
-    console.log('suggestions for:', term)
-    uds(term).then(omnibox)
-}
-
-let suggestions_debounced = debounce(function(term, omnibox) {
-    suggestions(term, omnibox)
-}, 500)
-
-chrome.omnibox.onInputChanged.addListener(suggestions_debounced)
+    chrome.omnibox.onInputChanged.addListener(suggestions_debounced)
+})
 
 let navigate = function(url, tab_disposition) {
     console.log(tab_disposition, 'navigate to', url)
