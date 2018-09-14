@@ -27,14 +27,14 @@ If you don't like the default keyword:
 
 	$ make name=wikipedia type=en keyword=w
 
-# How to use a .crx in Windows
+## How to use a .crx in Windows
 
 Unpack the file to some dir, e.g.,
 `$HOMEPATH/Documents/crx/urbandictionary-nsfw-omnibox`, in Chrome's
 extension page turn on 'Developer mode', then click 'Load unpacked' &
 select the dir.
 
-# Bugs
+## Bugs
 
 * The debounce wait time is hardcoded to 500ms;
 * tested w/ Chrome 69 only.
