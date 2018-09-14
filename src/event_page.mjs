@@ -1,3 +1,5 @@
+import * as u from './u.mjs'
+
 let manifest = chrome.runtime.getManifest()
 
 import(`./suggestions/${manifest['x-name']}.mjs`).then( module => {
@@ -11,7 +13,7 @@ import(`./suggestions/${manifest['x-name']}.mjs`).then( module => {
 
     chrome.omnibox.onInputChanged.addListener(suggestions_debounced)
     chrome.omnibox.onInputEntered.addListener( (term, tab_disposition) => {
-	if (!term.trim()) return
+	if (!u.term_valid(term)) return
 	navigate(module.url(term, manifest['x-type']), tab_disposition)
     })
 })

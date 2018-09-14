@@ -1,7 +1,7 @@
 import * as u from '../u.mjs'
 
 export default async function(term) {
-    if (!(term = term.trim())) return []
+    if (!u.term_valid(term)) return []
 
     return u.efetch(`http://api.urbandictionary.com/v0/autocomplete-extra?term=${encodeURIComponent(term)}`).then( r => r.json()).then(format)
 }

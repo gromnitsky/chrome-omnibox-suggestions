@@ -1,7 +1,7 @@
 import * as u from '../u.mjs'
 
 export default async function(term, lang) {
-    if (!(term = term.trim())) return []
+    if (!u.term_valid(term)) return []
 
     return u.efetch(`https://${lang}.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&search=${encodeURIComponent(term)}`).then( r => r.json()).then(format)
 }

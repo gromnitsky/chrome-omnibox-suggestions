@@ -17,3 +17,5 @@ export function xml_escape(s) {
         }
     })
 }
+
+export function term_valid(term) { return (term || '').trim().length !== 0 }
