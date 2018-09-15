@@ -15,17 +15,19 @@ See `engines.txt` for the full list of extensions you can make.
 
 ## Generation
 
-You'll need node 10.x, Ruby & GNU make.
+You'll need Ruby, GNU make &
+
+    # npm -g i json
 
 To create an extension for the English wikipedia:
 
-	$ make name=wikipedia type=en
+    $ make name=wikipedia type=en
 
 The resulting .crx should appear in `_out` dir.
 
 If you don't like the default keyword:
 
-	$ make name=wikipedia type=en keyword=w
+    $ make name=wikipedia type=en keyword=w
 
 ## How to use a .crx in Windows
 
