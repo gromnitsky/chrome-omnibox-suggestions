@@ -3,7 +3,7 @@ import assert from 'assert'
 import 'isomorphic-fetch'
 import fetch_mock from 'fetch-mock'
 
-export function test_fetch(suite_name, res, fn) {
+export function test_fetch(suite_name, res, expect, fn) {
     suite(suite_name, function() {
 	setup(function() {
 	    fetch_mock.get('*', res)
@@ -14,7 +14,7 @@ export function test_fetch(suite_name, res, fn) {
 
 	test('smoke', async function() {
 	    let r = await fn('u')
-	    assert.deepEqual(r, [
+	    assert.deepEqual(r, expect || [
 		{ content: 'u',
 		  description: '<match>u</match><dim> - 123&gt;</dim>'
 		}

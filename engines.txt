@@ -1,4 +1,5 @@
 # name           keyword        type          type_desc(optional)
+ldoce            ldoce          en
 urbandictionary  u              nsfw
 wikipedia        waa            aa            Afar
 wikipedia        wab            ab            Abkhazian
