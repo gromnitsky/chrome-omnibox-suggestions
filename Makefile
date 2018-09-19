@@ -55,4 +55,4 @@ upload:
 
 .PHONY: test
 test:
-	mocha --require @babel/register -u tdd test/*mjs
+	mocha --require @babel/register -u tdd test/test_*mjs
