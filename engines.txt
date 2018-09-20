@@ -1,4 +1,5 @@
 # name           keyword        type          type_desc(optional)
+imdb             imdb           en
 ldoce            ldoce          en
 urbandictionary  u              nsfw
 wikipedia        waa            aa            Afar

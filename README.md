@@ -1,7 +1,7 @@
 # Chrome omnibox suggestions
 
 A collection of search suggestion 'engines' for different websites
-(for the time being it's wikipedia, ldoce & urbandictionary).
+(for the time being it's imdb, wikipedia, ldoce & urbandictionary).
 
 ![omnibar](https://ultraimg.com/images/2018/09/12/O02p.png)
 
