@@ -5,7 +5,7 @@ A collection of search suggestion 'engines' for different websites
 
 ![omnibar](https://ultraimg.com/images/2018/09/12/O02p.png)
 
-Each 'engines' has a type & a unique keyword. Chrome doesn't allow us
+Each 'engine' has a type & a unique keyword. Chrome doesn't allow us
 to register multiple omnibox keywords for a single extension, thus if
 we want to have search suggestions, say, for the English wikipedia &
 for the Ukrainian wikipedia, we need to *generate* 2 separate
@@ -39,7 +39,6 @@ select the dir.
 ## Bugs
 
 * The debounce wait time is hardcoded to 500ms;
-* tested w/ Chrome 69 only.
 
 ## License
 
