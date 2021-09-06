@@ -1,15 +1,15 @@
-import * as u from './u.mjs'
+import * as u from './u.js'
 
 let manifest = chrome.runtime.getManifest()
 
-import(`./suggestions/${manifest['x-name']}.mjs`).then( module => {
+import(`./suggestions/${manifest['x-name']}.js`).then( module => {
     let suggestions = function(term, omnibox) {
 	console.log('suggestions for:', term)
 	module.default(term, manifest['x-type']).then(omnibox)
     }
     let suggestions_debounced = debounce(function(term, omnibox) {
 	suggestions(term, omnibox)
-    }, 500)
+    }, 250)
 
     chrome.omnibox.onInputChanged.addListener(suggestions_debounced)
     chrome.omnibox.onInputEntered.addListener( (term, tab_disposition) => {

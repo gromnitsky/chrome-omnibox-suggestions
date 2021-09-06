@@ -1,45 +1,12 @@
 {
+    "type": "module",
     "private": "true",
     "name": "see-src-manifest.erb.json",
-    "version": "0.0.1-see-src-manifest.erb.json",
+    "version": "0.0.0-see-src-manifest.erb.json",
     "author": "Alexander Gromnitsky",
     "license": "MIT",
     "devDependencies": {
-        "@babel/core": "~7.1.0",
-        "@babel/preset-env": "~7.1.0",
-        "@babel/register": "~7.0.0",
-        "fetch-mock": "~7.0.0-alpha.6",
-        "isomorphic-fetch": "~2.2.1"
-    },
-    "babel": {
-        "presets": [
-            [
-                "@babel/preset-env",
-                {
-                    "targets": {
-                        "node": "current"
-                    }
-                }
-            ]
-        ]
-    },
-    "eslintConfig": {
-        "parser": "babel-eslint",
-        "env": {
-            "browser": true,
-            "mocha": true,
-            "webextensions": true
-        },
-        "extends": [
-            "eslint:recommended"
-        ],
-        "rules": {
-            "no-console": [
-                "off"
-            ],
-            "no-mixed-spaces-and-tabs": [
-                "off"
-            ]
-        }
+        "fetch-mock": "~9.11.0",
+        "isomorphic-fetch": "~3.0.0"
     }
 }

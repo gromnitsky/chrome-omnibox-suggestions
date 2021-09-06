@@ -1,4 +1,4 @@
-import * as u from '../u.mjs'
+import * as u from '../u.js'
 
 export default async function(term, type) {
     if (!u.term_valid(term)) return []

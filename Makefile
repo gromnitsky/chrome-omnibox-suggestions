@@ -16,8 +16,8 @@ all: crx
 out := _out/$(name)-$(type)-omnibox
 mkdir = @mkdir -p $(dir $@)
 
-f.src := $(wildcard src/*.mjs) $(wildcard src/*.html) \
-	src/suggestions/$(name).mjs $(wildcard src/icons/$(name)*png)
+f.src := $(wildcard src/*.js) $(wildcard src/*.html) \
+	src/suggestions/$(name).js $(wildcard src/icons/$(name)*png)
 f.dest := $(patsubst src/%, $(out)/%, $(f.src))
 
 $(out)/%: src/%
@@ -53,4 +53,4 @@ $(pkg).zip: $(compile.all)
 
 .PHONY: test
 test:
-	mocha --require @babel/register -R list -u tdd $(t) test/test_*mjs
+	mocha -R list -u tdd $(t) test/test_*js

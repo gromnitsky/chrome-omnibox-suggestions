@@ -1,9 +1,9 @@
-import * as u from '../u.mjs'
+import * as u from '../u.js'
 
 export default async function(term) {
     if (!u.term_valid(term)) return []
 
-    return u.efetch(`http://api.urbandictionary.com/v0/autocomplete-extra?term=${encodeURIComponent(term)}`).then( r => r.json()).then(format)
+    return u.efetch(`https://api.urbandictionary.com/v0/autocomplete-extra?term=${encodeURIComponent(term)}`).then( r => r.json()).then(format)
 }
 
 function format(json) {

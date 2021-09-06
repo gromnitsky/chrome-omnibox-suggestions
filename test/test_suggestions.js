@@ -1,7 +1,7 @@
-import wikipedia from '../src/suggestions/wikipedia.mjs'
-import urbandictionary from '../src/suggestions/urbandictionary.mjs'
-import ldoce from '../src/suggestions/ldoce.mjs'
-import * as h from './helper'
+import wikipedia from '../src/suggestions/wikipedia.js'
+import urbandictionary from '../src/suggestions/urbandictionary.js'
+import ldoce from '../src/suggestions/ldoce.js'
+import * as h from './helper.js'
 
 h.test_fetch('wikipedia', [
     "u",

@@ -1,4 +1,4 @@
-import * as u from '../u.mjs'
+import * as u from '../u.js'
 
 export default async function(term, lang) {
     let url = sg_url(term)

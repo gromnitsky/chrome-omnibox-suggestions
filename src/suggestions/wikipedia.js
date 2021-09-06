@@ -1,4 +1,4 @@
-import * as u from '../u.mjs'
+import * as u from '../u.js'
 
 export default async function(term, lang) {
     if (!u.term_valid(term)) return []
@@ -9,6 +9,9 @@ export default async function(term, lang) {
 function format(json) {
     if (!Array.isArray(json && json[1])) return []
     let [term, suggs, desc, urls] = json
+    // On Wikimedia wikis descriptions are disabled due to performance
+    // reasons, so `desc` only contains empty strings
+    // https://phabricator.wikimedia.org/T241437
 
     return suggs.map( (val, idx) => {
 	// https://developer.chrome.com/extensions/omnibox#type-SuggestResult
