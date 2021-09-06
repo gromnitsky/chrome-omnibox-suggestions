@@ -3,7 +3,7 @@
 A collection of search suggestion 'engines' for different websites
 (for the time being it's imdb, wikipedia, ldoce & urbandictionary).
 
-![omnibar](https://ultraimg.com/images/2018/09/12/O02p.png)
+![omnibar](screenshot.png)
 
 Each 'engine' has a type & a unique keyword. Chrome doesn't allow us
 to register multiple omnibox keywords for a single extension, thus if
@@ -38,7 +38,7 @@ select the dir.
 
 ## Bugs
 
-* The debounce wait time is hardcoded to 500ms;
+* The debounce wait time is hardcoded to 250ms;
 
 ## License
 
