@@ -14,24 +14,33 @@ $(if $(keyword),,$(error `keyword` is empty (`type` may be invalid)))
 all: crx
 
 out := _out/$(name)-$(type)-omnibox
+cache := _out/.cache/$(name)-$(type)-omnibox
 mkdir = @mkdir -p $(dir $@)
 
 f.src := $(wildcard src/*.js) $(wildcard src/*.html) \
 	src/suggestions/$(name).js $(wildcard src/icons/$(name)*png)
 f.dest := $(patsubst src/%, $(out)/%, $(f.src))
+f.deps := $(patsubst $(out)/%.js, $(cache)/%.d, $(filter %.js, $(f.dest)))
+
+$(warning *** RELOAD ***)
+-include $(f.deps)
 
 $(out)/%: src/%
 	$(mkdir)
 	cp $< $@
 
+$(cache)/%.d: $(out)/%.js
+	$(mkdir)
+	./deps.js $< > $@
+
 $(out)/manifest.json: src/manifest.erb.json
 	$(mkdir)
 	erb name=$(name) type=$(type) type_desc=$(type_desc) keyword=$(keyword) $< > $@
 
-$(out)/rollup/deburr.js: node_modules/lodash.deburr/index.js
+$(out)/rollup/%: node_modules/%
 	node_modules/.bin/rollup -p @rollup/plugin-commonjs -m -i $< -o $@
 
-compile.all := $(f.dest) $(out)/manifest.json $(out)/rollup/deburr.js
+compile.all := $(f.dest) $(out)/manifest.json
 compile: $(compile.all)
 
 

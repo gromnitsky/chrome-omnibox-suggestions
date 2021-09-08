@@ -1,4 +1,4 @@
-import deburr from '../rollup/deburr.js'
+import deburr from '../rollup/lodash.deburr/index.js'
 import * as u from '../u.js'
 
 export default async function(term, lang) {
