@@ -17,7 +17,7 @@ See `engines.txt` for the full list of extensions you can make.
 
 You'll need Ruby, GNU make &
 
-    # npm -g i json
+    # npm -g i json crx3-utils
 
 To create an extension for the English wikipedia:
 

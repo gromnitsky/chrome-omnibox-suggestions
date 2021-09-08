@@ -1,3 +1,4 @@
+import deburr from '../rollup/deburr.js'
 import * as u from '../u.js'
 
 export default async function(term, lang) {
@@ -35,24 +36,14 @@ export function url(term, engine_type) {
     }
 }
 
+//  input: åmëlí
+// return: https://v2.sg.media-imdb.com/suggests/a/ameli.json
 let sg_url = function(input) {
-    // mein gott, lieber vasisualy
-    let G = /[àÀáÁâÂãÃäÄåÅæÆçÇèÈéÉêÊëËìÍíÍîÎïÏðÐñÑòÒóÓôÔõÕöÖøØùÙúÚûÛüÜýÝÿþÞß]/
-    function n(a) {
-	if (a) {
-            var b = a.toLowerCase();
-            return b.length > 20 && (b = b.substr(0, 20)),
-            b = b.replace(/^\s*/, "").replace(/[ ]+/g, "_"),
-            G.test(b) && (b = b.replace(/[àÀáÁâÂãÃäÄåÅæÆ]/g, "a").replace(/[çÇ]/g, "c").replace(/[èÈéÉêÊëË]/g, "e").replace(/[ìÍíÍîÎïÏ]/g, "i").replace(/[ðÐ]/g, "d").replace(/[ñÑ]/g, "n").replace(/[òÒóÓôÔõÕöÖøØ]/g, "o").replace(/[ùÙúÚûÛüÜ]/g, "u").replace(/[ýÝÿ]/g, "y").replace(/[þÞ]/g, "t").replace(/[ß]/g, "ss")),
-            b = b.replace(/[\W]/g, "")
-	}
-	return ""
-    }
-
     let url = function(a, b) {
         return "https://v2.sg.media-imdb.com/suggests/" + a + "/" + b + ".json"
     }
-    let term = n(input)
-    if (!term) return ""
-    return url(term.substr(0, 1), term)
+
+    if (!input) return
+    input = deburr(input)
+    return url(input.substr(0, 1), input)
 }

@@ -3,7 +3,7 @@ import assert from 'assert'
 import 'isomorphic-fetch'
 import fetch_mock from 'fetch-mock'
 
-import * as imdb from '../src/suggestions/imdb.js'
+import * as imdb from '../_out/imdb-en-omnibox/suggestions/imdb.js'
 
 suite('imdb', function() {
     setup(function() {
