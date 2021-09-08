@@ -14,29 +14,24 @@ $(if $(keyword),,$(error `keyword` is empty (`type` may be invalid)))
 all: crx
 
 out := _out/$(name)-$(type)-omnibox
+cache := _out/.cache/$(name)-$(type)-omnibox
 mkdir = @mkdir -p $(dir $@)
 
 f.src := $(wildcard src/*.js) $(wildcard src/*.html) \
 	src/suggestions/$(name).js $(wildcard src/icons/$(name)*png)
 f.dest := $(patsubst src/%, $(out)/%, $(f.src))
-f.deps := $(patsubst %.js, %.d, $(filter %.js, $(f.dest)))
+f.deps := $(patsubst $(out)/%.js, $(cache)/%.d, $(filter %.js, $(f.dest)))
 
 $(warning *** RELOAD ***)
 -include $(f.deps)
 
-$(out)/%.js: $(out)/%.d
-
-$(out)/%.d: src/%.js
-	$(mkdir)
-	./deps.js $(out) $< > $@
-
-$(out)/suggestions/%.d: src/suggestions/%.js
-	$(mkdir)
-	./deps.js $(out)/rollup $< > $@
-
 $(out)/%: src/%
 	$(mkdir)
 	cp $< $@
+
+$(cache)/%.d: $(out)/%.js
+	$(mkdir)
+	./deps.js $< > $@
 
 $(out)/manifest.json: src/manifest.erb.json
 	$(mkdir)
