@@ -4,12 +4,15 @@ import * as u from './u.js'
 let manifest = chrome.runtime.getManifest()
 
 import(`./suggestions/${manifest['x-name']}.js`).then( module => {
-    let suggestions = function(term, omnibox) {
+    let suggestions = function(term, suggestions_upd) {
 	console.log('suggestions for:', term)
-	module.default(term, manifest['x-type']).then(omnibox)
+	module.default(term, manifest['x-type']).then( json => {
+            set_first_suggestion(json, term)
+            suggestions_upd(json)
+        })
     }
-    let suggestions_debounced = debounce(function(term, omnibox) {
-	suggestions(term, omnibox)
+    let suggestions_debounced = debounce(function(term, suggestions_upd) {
+        suggestions(term, suggestions_upd)
     }, 250)
 
     chrome.omnibox.onInputChanged.addListener(suggestions_debounced)
@@ -18,6 +21,22 @@ import(`./suggestions/${manifest['x-name']}.js`).then( module => {
 	navigate(module.url(term, manifest['x-type']), tab_disposition)
     })
 })
+
+function set_first_suggestion(json, term) { // modifies `json`
+    let idx = json.findIndex( v => v?.content === term)
+    if (idx !== -1) {
+        chrome.omnibox.setDefaultSuggestion({
+            description: json[idx].description
+        })
+        json.splice(idx, 1)
+        return
+    }
+
+    // reset
+    chrome.omnibox.setDefaultSuggestion({
+        description: `<url><match>${u.xml_escape(term)}</match></url>`
+    })
+}
 
 function navigate(url, tab_disposition) {
     console.log(tab_disposition, 'navigate to', url)
