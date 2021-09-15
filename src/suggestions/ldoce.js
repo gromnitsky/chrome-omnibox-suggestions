@@ -19,5 +19,5 @@ function format(json) {
 }
 
 export function url(term, engine_type) {
-    return `https://www.ldoceonline.com/search/?q=${encodeURIComponent(term)}`
+    return `https://www.ldoceonline.com/dictionary/${encodeURIComponent(term)}`
 }
